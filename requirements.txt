@@ -4,3 +4,4 @@ djangorestframework==3.6
 psycopg2
 markdown
 graphene_django
+django-cors-headers
