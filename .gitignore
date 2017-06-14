@@ -1,0 +1,21 @@
+# Created by https://www.gitignore.io/api/django
+
+### Django ###
+*.log
+*.pot
+*.pyc
+*.idea
+*.idea/
+__pycache__/  
+**/__pycache__
+app/local_settings.py
+media
+venv
+staticfiles
+.env
+.vscode
+
+# DB SQLite
+db.sqlite3
+
+# End of https://www.gitignore.io/api/django

@@ -1,12 +1,12 @@
 version: '2'
 services:
   db:
-    image: postgres:9.5.0
+    image: postgres
     volumes:
       - .:/tmp/data/
   web:
     build: .
-    image: duety
+    image: grapgql-django
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
@@ -14,11 +14,3 @@ services:
       - "8000:8000"
     depends_on:
         - db
- migration:
-   build: .
-   image: duety
-   command: python manage.py migrate
-   volumes:
-     - .:/code
-   depends_on:
-     - db
