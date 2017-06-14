@@ -1,0 +1,24 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.5.0
+    volumes:
+      - .:/tmp/data/
+  web:
+    build: .
+    image: duety
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+        - db
+ migration:
+   build: .
+   image: duety
+   command: python manage.py migrate
+   volumes:
+     - .:/code
+   depends_on:
+     - db
