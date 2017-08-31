@@ -2,9 +2,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+from raven.contrib.django.raven_compat.models import client
 
 from tasks.models import Category
 from tasks.serializers.categories_serializers import CategorySerializer
+
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class CategoriesList(APIView):
     """
@@ -29,7 +35,8 @@ class CategoriesDetail(APIView):
     def get_object(self, pk):
         try:
             return Category.objects.get(pk=pk)
-        except Task.DoesNotExist:
+        except Category.DoesNotExist:
+            logger.error('There was some crazy error', exc_info=True)
             raise Http404
 
     def get(self, request, pk, format=None):
